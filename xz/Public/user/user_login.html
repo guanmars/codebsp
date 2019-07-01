@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <style>
+     body{
+	     background-image:url("./photo/timg8.jpg");
+		 background-size:cover;
+         background-attachment:fixed;
+	  }
+	  h3{
+	     color:#11a4ef;
+	  }
+	div{
+	     width:630px;height:360px;
+	     border:0px solid #000;
+		 margin:360px auto 0px;
+		 padding:10px;
+		 font-family:"华文新魏";
+		 font-size:30px;
+		 background-image:url("./photo/22.jpeg")
+	  }
+	input{
+	     margin-top:81px;
+		 padding:10px 20px;
+	  }
+	.input3{
+	     margin-left:250px;
+		 padding:10px 60px;
+		 background:#11a4ef;
+		 font-family:"华文行楷";
+		 font-size:20px;
+	  }
+	span{
+	     font-size:15px;
+         color:red;
+	  }
+  </style>
+  <title>Document</title>
+ </head>
+ <body>
+  <div>
+    <h3 align="center">用户登入</h3>
+	<form action="/user/login" method="post">
+		用户<input type="text" name="uname">
+		<span>*用户名不能为空*</span><br>
+		密码<input type="password" name="upwd">
+		<span>*请输入密码*</span><br>
+		<input class="input3" type="submit" value="登入">
+	</form>
+  </div>
+ </body>
+</html>

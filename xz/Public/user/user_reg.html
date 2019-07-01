@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+	body{
+	     background-image:url("./photo/01.jpg");
+		 background-size:cover;
+         background-attachment:fixed;
+	}
+	div{
+	     width:450px;height:960px;
+	     border:0px solid #000;
+		 float:right;
+		 margin:0px 250px 0px 0px;
+		 padding:10px;
+		 font-family:"华文新魏";
+		 font-size:30px;
+		 color:#032e58;
+		 background-image:url("./photo/15.jpeg");
+		 background-size:450px 960px;
+	}
+	input{
+	     margin-top:63px;
+		 padding:10px 20px;
+	}
+	.input5{
+	     margin-left:81px;
+		 padding:10px 60px;
+		 background:#11a4ef;
+		 font-family:"华文行楷";
+		 font-size:20px;
+	}
+	span{
+	     font-size:15px;
+		 color:red;
+	}
+  </style>
+  <title>Document</title>
+ </head>
+ <body>
+ <body>
+ <div>
+    <h2 align="center">用户注册表</h2>
+	<form action="/user/reg" method="post">
+		用户<input type="text" name="uname">
+		<span>*必填*请用字母或数字*</span><br>
+		密码<input type="password" name="upwd">
+		<span>*必填*请用数字加字母*</span><br>
+		姓名<input type="text" name="user_name">
+		<span>*请写真实姓名*</span><br>
+		性别<input type="text"name="gender">
+		<span>* 1 -> ♂* 0 -> ♀*</span><br>
+		手机<input type="text" name="phone">
+		<span>*必填*</span><br>
+		邮箱<input type="text" name="email">
+		<span>*必填*</span><br>
+		    <input class="input5" type="submit" value="提交">
+	</form>
+ </div>
+</body>
+ </body>
+</html>
