@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+   <style>
+ /*常用的style设置*/
+    /*border style*/
+		.bod{border:0px solid #000;}
+    /*bgcolor style*/
+        .bgc1{background-color:#f5f5f5;}
+    /*list style none */
+        .list{
+            list-style:none;
+            padding:0px;
+            margin:0px;
+        }
+    /*width style*/
+        .ht1{height:150px;}
+        .ht2{height:100%}
+    /*height style*/
+        .wt1{width:960px;}
+        .wt2{width:100%;}
+    /*float style*/
+        .flt1{float:left;}
+        .flt2{float:right;}
+    /*margin style*/
+        .mrg{margin:auto;}
+      /*top*/
+        .mrgt1{margin-top:66px;}
+      /*left*/
+        .mrgl1{margin-left:30px}
+        .mrgl2{margin-left:55px;}
+    /*text style*/
+      /*font-size-family-weight-style*/
+        .txt1{
+			font-size:14px;
+			font-family:"楷体";
+			font-weight:400;
+		}
+      /*text-align style*/
+        .txt2{text-align:center;}
+ /*section style*/
+    /*icon style*/
+      /*li内容style*/
+		.icon li{
+		    border:0px solid #000;
+			width:240px; height:80px;
+			float:left;
+        }
+ /*footer style*/
+    /*footer_section style*/
+      /*中间文字域部分style*/
+       .ftxt li{
+            border:0px solid #000;
+            float:left;
+       }
+       .ftxt a{text-decoration:none;}
+       .ftxt li span a{
+            font-family:"楷体";
+            font-size:12px;
+            color:gray;
+       }
+       .hdt a{color:#000;}
+   </style>
+  <title>codeboy——footer</title>
+ </head>
+ <body>
+ <!--section-icon-->
+    <section class="bgc1 mrgt1 ht1 wt2">
+    <!--用ul设计icon布局-->
+    	<ul class="icon list bod mrg wt1 txt1 txt2">
+			<li>
+				<img src="cpi/icon1.png"><br>
+			   品质保证
+			</li>
+			<li>
+				<img src="cpi/icon2.png"><br>
+				私人订制
+			</li>
+			<li>
+				<img src="cpi/icon3.png"><br>
+				学员特供
+			</li>
+			<li>
+				<img src="cpi/icon4.png"><br>
+				专属特权
+			</li>
+		</ul>
+    </section>
+ <!--footer-section-->
+    <footer class="bod mrgt1">
+    <!--foot内容部分-->
+    	<section class="foot bod mrg wt1 ht1 ">
+        <!--foot left section-->
+			<div class="flogo bod flt1">
+            <!--两张logo图片-->
+                <p>
+				   <img src="cpi/logo.png">
+                </p>
+                <p>
+				   <img src="cpi/footerFont.png">
+                </p>
+			</div>
+        <!--foot middle section-->
+          <!--用ul设计文字布局-->
+            <ul class="ftxt flt1 list bod mrgl1 txt2">
+            <!--第一列--> 
+                <li>
+                    <p class="hdt txt1">
+                        <a href="#">买家帮助</a>
+                    </p>
+                    <span>
+                    <p>
+                        <a href="#">新手指南</a>
+                    </p>
+                    <p>
+                        <a href="#">服务保障</a>
+                    </p>
+                    <p>
+                        <a href="#">常见问题</a>
+                    </p>
+                    </span>
+                </li>
+            <!--第二列-->
+                <li class="mrgl2">
+                    <p class="hdt txt1">
+                        <a href="#">商家帮助</a>
+                    </p>
+                    <span>
+                    <p>
+                        <a href="#">卖家入驻</a>
+                    </p>
+                    <p>
+                        <a href="#">商家后台</a>
+                    </p>
+                    </span>
+                </li>
+            <!--第三列-->
+                <li class="mrgl2">
+                    <p class="hdt txt1">
+                        <a href="#">关于我们</a>
+                    </p>
+                    <span>
+                    <p>
+                        <a href="#">关于达内</a>
+                    </p>
+                    <p>
+                        <a href="#">联系我们</a>
+                    </p>
+                    <p>
+                        <img src="cpi/sinablog.png">
+                        <img src="cpi/wechat.png">
+                    </p>
+                    <span>
+                </li>
+            </ul>
+        <!--foot rignt section-->
+			<ul class="fclt list bod flt2">
+				<li class="bod flt1">
+                    <p class="txt1"align="center">
+                        学子商城客户端
+                    </p>
+                    <p>
+                        <img src="cpi/ios.png"><br>
+                        <img src="cpi/android.png">
+                    </p>
+                </li>
+                <li class="bod flt2">
+                    <p>
+                       <img src="cpi/erweima.png">
+                    </p>
+                </li>
+			</ul>
+		</section>
+    <!--版权说明-->
+        <div class="bod wt1 mrg txt1">
+           <p align="center">©2017 达内科技有限公司 版权所有 京ICP备08000853号-75</p>
+        <div>
+    </footer>
+ </body>
+</html>
