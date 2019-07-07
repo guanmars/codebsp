@@ -2,52 +2,124 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
+	<script>
+	  function uin(){ucue.innerHTML="";}
+		function uout(){if(!uname.value){ucue.innerHTML="用户名不能为空";}}
+		function pin(){pcue.innerHTML="";}
+		function pout(){if(!upwd.value){pcue.innerHTML="密码不能为空";}}
+		function login(){
+			var $uname=uname.value,
+			    $upwd=upwd.value;
+			if(!$uname){return;}
+			if(!$upwd){return;}
+			var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200)
+						{
+							var result=xhr.responseText;
+							if(result==="1"){alert("登入成功");}
+							else if(result==="0"){alert("登入失败");}
+						}
+			    }
+					xhr.open("get","/user/login/uname="+$uname+"&upwd="+$upwd,true);
+					xhr.send();
+		}
+	</script>
   <style>
-     body{
-	     background-image:url("./photo/timg8.jpg");
-		 background-size:cover;
-         background-attachment:fixed;
-	  }
-	  h3{
-	     color:#11a4ef;
-	  }
-	div{
-	     width:630px;height:360px;
-	     border:0px solid #000;
-		 margin:360px auto 0px;
-		 padding:10px;
-		 font-family:"华文新魏";
-		 font-size:30px;
-		 background-image:url("./photo/22.jpeg")
-	  }
-	input{
-	     margin-top:81px;
-		 padding:10px 20px;
-	  }
-	.input3{
-	     margin-left:250px;
-		 padding:10px 60px;
-		 background:#11a4ef;
-		 font-family:"华文行楷";
-		 font-size:20px;
-	  }
-	span{
-	     font-size:15px;
-         color:red;
-	  }
+/*base style*/
+  /*border style*/
+	.bod{border:0px solid #000;}
+  /*background-image style*/
+    .bgi1{background-image:url('../photo/215.jpg');}
+    .bgi2{background-image:url('../photo/212.jpg');}
+  /*background-size style*/
+    .bgs1{background-size:100% 100%;}
+    .bgs2{background-size:100% 280px;}
+  /*bgcolor style*/
+	 .bgc1{background-color:#fff;}
+    .bgc2{background-color:#a11311;}
+  /*width style*/
+    .wt1{width:100%;}
+  /*height style*/
+	 .ht1{height:15px;}
+    .ht2{height:630px;}
+  /*padding style*/
+	 .pad1{padding:12.5px 35px 12.5px 20px;}
+	 .pad2{padding:10px 114px;}
+    .padr1{padding-right:35px;}
+  /*margin-top style*/
+	 .mrgt1{margin-top:10px;}
+  /*float style*/
+	 .flt1{float:left;}
+	 .flt2{float:right;}
+  /*color style*/
+    .clr3{color:#fff;}
+    .clr4{color:#a11311;}
+  /* font-family style*/
+	 .tf1{font-family:"楷体";}
+  /*font-size style*/
+	 .ts1{font-size:14px;}
+	 .ts2{font-size:20px;}
+  /*font-weight style*/
+    .tw1{font-weight:bold;}
+  /*text-decoration style*/
+    .td1{text-decoration:none;}
+  /*outline*/
+    .otl1{outline:none;}
+/*login-input-style*/
+	.login{
+	     width:270px; height:320px;
+		  margin:160px 80px 0px 0px;
+		  padding:0 20px 10px 20px;
+	}
   </style>
-  <title>Document</title>
  </head>
  <body>
-  <div>
-    <h3 align="center">用户登入</h3>
-	<form action="/user/login" method="post">
-		用户<input type="text" name="uname">
-		<span>*用户名不能为空*</span><br>
-		密码<input type="password" name="upwd">
-		<span>*请输入密码*</span><br>
-		<input class="input3" type="submit" value="登入">
-	</form>
-  </div>
+   <!--section login-->
+      <section class="bod bgi1 bgs1 wt1 ht2 tf1">
+		<!--login-input-->
+			<div class="login bod bgi2 bgs2 clr3 flt2">
+			<!--head 文字说明-->
+				<header class="desc bod">
+					<h2>登入学子商城
+               <!--注册页面的超链接-->
+                        <a class="bod flt2 td1 ts1 clr4"href="user_register.html">
+                            新用户注册
+                        </a>
+						  <br>
+						  <hr border="2px"color="#a11311">
+          </h2>
+				</header>
+			<!--用户、密码输入框-->
+				<section class="bod">
+				<!--用户输入框-->
+				   <div class="bod bgc1">
+				      <input class="bod pad1 otl1"id="uname"onfocus="uin()"onblur="uout()"type="text"placeholder="请输入您的用户名">
+					    <img src="../cpi/yhm.png"align="absmiddle">
+					</div>
+				<!--提示框-->
+            <p class="bod ts1 ht1 clr4"id="ucue"></p>
+				<!--密码输入框-->
+					<div class="bod bgc1">
+					   <input class="bod pad1 padr1 otl1"id="upwd"onfocus="pin()"onblur="pout()"
+						 type="password"placeholder="请输入您的密码">
+					   <img src="../cpi/mm.png"align="absmiddle">
+					</div> 
+				<!--提示框-->
+					<p class="bod ts1 ht1 clr4"id="pcue"></p>
+				</section>
+			<!--foot 登入部分-->
+				<footer>
+				<!--自动登入/忘记密码-->
+				    <input type="CheckBox"id="slg">
+				    <label  class="ts1 tw1 clr3"for="slg">自动登入</label>
+					<span class="bod flt2 ts1 tw1 clr3">忘记密码?</span>
+				<!--登入框-->
+					<button onclick="login()"class="bod bgc2 pad2 mrgt1 tf1 ts2 tw1 clr3 otl1">登录</button>
+				</footer>
+				</section>
+			</div>
+      </section>
  </body>
 </html>
+

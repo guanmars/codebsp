@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+	<script>
+	//用户名验证提示
+	    function uin(){ucue.innerHTML="用户名长度在6到9位";}
+	    function uout(){
+				if(!uname.value){ucue.innerHTML="用户名不能为空";}
+				else{
+	    //用户名是否可用验证
+				var 	xhr=new XMLHttpRequest();
+					    xhr.onreadystatechange=function(){
+								if(xhr.State==4&&xhr.staus==200)
+								{
+									var result=xhr.responseText;
+									if(result==="1"){ucue.innerHTML="用户可以使用";}
+									else if(result==="0"){ucue.innerHTML="用户名已存在";}
+								}
+					    }
+							xhr.open("get","/verify_user/uname="+$uname,true);
+              xhr.send();
+					}
+				}
+  //密码验证提示
+	    function ppin(){ppcue.innerHTML="密码长度在6到12位";}
+			function ppout(){if(!upwd.value){ppcue.innerHTML="密码不能为空";}}
+	//密码确认验证
+	    function cpin(){cpcue.innerHTML="密码长度在6到12位";}
+			function cpout(){
+				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空";
+				}
+				else if(cpwd.value!==upwd.value){cpcue.innerHTML="两次输入密码不一致";}
+				else{cpcue.innerHTML="两次输入密码一致";}
+				}
+	//邮箱验证提示
+	    function ein(){ecue.innerHTMl="请输入合法的邮箱地址";}
+			function eout(){
+				if(!email.value){ecue.innerHTML="邮箱不能为空";}
+				else
+				{
+			//邮箱格式是否正确验证
+			var $email=email.value;
+			    
+				}
+			}
+	//登入function	
+		  function regist(){
+				var $uname=uname.value,
+				    $upwd=upwd.value,
+						$email=email.value,
+						$phone=phone.vlaue;
+				var xhr.XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200)
+							{
+								var result=xhr.responseText;
+								if(result==="1"){alert("注册成功");}
+								else if(result==="0"){alert("注册失败");}
+							}
+				    }
+						xhr.open("post","/user/reg",true);
+						xhr.setRequestHeader("Content-type","application/x-www-form-urlencoding");
+				var formdata="uname="+$uname+"upwd="+$upwd+"email="+$email+"phone="+$phone;
+				    xhr.send(formdata);
+		  }
+	</script>
+  <style>
+    .bod{border:0px solid #000;}
+    .wt1{width:100%;}
+    .wt2{width:300px;}
+    .wt3{width:220px;}
+    .wt4{width:120px;}
+    .ht1{height:630px;}
+    .bgc1{background-color:#13a5f0;}
+    .bgc2{background-color:#a11311;}
+    .bgc3{background-color:#000;}
+    .bgi1{
+          background-image:url("../photo/215.jpg");
+          background-size:81% 100%;
+          }
+    .bgi2{
+          background-image:url("../photo/214.png");
+          background-size:130% 100%;
+          opacity:0.9;
+          }
+    .flt1{float:right;}
+    .mrg1{margin:40px 40px 0px 0px;}
+    .clr1{color:#fff;}
+    .clr2{color:#a11311;}
+    .clr3{color:#13a5f0;}
+	  .txt1{
+	    font-size:16px;
+	    font-family:"楷体";
+		  font-weight:800;
+	  }
+    .ts1{font-size:15px;}
+		.td1{text-decoration:none;}
+    .ta1{text-align:right;}
+    .tw1{font-weight:bold;}
+    .reg tbody tr{height:80px;}
+		.reg tfoot tr{height:80px;}
+    .reg tbody input{
+        border:0px solid #000;
+				padding-left:30px;
+        width:270px; height:40px;
+        outline:none;
+     }
+    input::-webkit-input-placeholder{
+        font-size:16px;
+    }
+		.reg tfoot input{
+		    width:300px; height:45px;
+        outline:none;
+		}
+    .reg tbody span{
+        border:0px solid #000;
+        font-size:15px;
+        background-color:red;
+    }
+  </style>
+  <title>Document</title>
+ </head>
+ <body>
+      <section class="wt1 ht1 bgi1">
+				<table class="reg txt1 bgi2 clr2 flt1 mrg1">
+				  <thead>
+              <tr>
+                  <td colspan="2">
+                    <h2 class="clr2">
+                      新用户注册
+                      <a class="bod flt1 ts1 td1 clr2"href="user_login.html">直接登入</a>
+                    </h2>
+                  </td>
+                  <td></td>
+              </tr>
+				  </thead>
+					<tbody>
+						<tr>
+							<td class="ta1 wt4">用户名：</td>
+							<td class="wt2">
+								<input id="uname"onfocus="uin()"onblur="uout()"type="text"placeholder="请 设 置 您 的 用 户 名">
+							</td>
+							<td class="wt3">
+							   <span id="ucue"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="ta1">登入密码：</td>
+							<td>
+								<input id="upwd"onfocus="pdin()"onblur="pdout()"type="password"placeholder="请 设 置 您 的 密 码">
+							</td>
+							<td>
+								<span id="ppcue"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="ta1">确认密码：</td>
+							<td>
+								<input id="cpwd"onfocus="cpin()"onblur="cpout()"type="password"placeholder="请 确 认 您 的 密 码">
+							</td>
+							<td>
+								<span id="cpcue"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="ta1">邮箱：</td>
+							<td>
+							  <input id="email"onfocus="ein()"onblur="eout()"type="text"placeholder="请 输 入 您 的 邮 箱">
+							</td>
+							<td>
+								<span id="ecuce"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="ta1">手机号：</td>
+							<td>
+							  <input id="phone"onfocus="phin()"onblur="phout()"type="tel"max="11"placeholder="请 输 入 您 的 手 机 号">
+							</td>
+							<td>
+								<span id="phcue"></span>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot class="mrg2">
+						<tr>
+							<td></td>
+							<td>
+							  <input onclick="regist()"class="bod txt1 bgc2 tw1 clr1"type="submit"value="提交注册信息">
+							</td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+      </section> 
+ </body>
+</html>

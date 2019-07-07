@@ -17,6 +17,8 @@ const indexRouter=require('./Routers/index.js');
 	extended:false
  }));
 //设置PUBLIC
+ app.use(express.static('public/cpi'));
+ app.use(express.static('public/photo'));
  app.use(express.static('public/user'));
  app.use(express.static('public/product'));
  app.use(express.static('public/cart'));
