@@ -3,54 +3,72 @@
  <head>
   <meta charset="UTF-8">
 	<script>
+	//定义bool变量
+			var ub,pdb,cdb,eb,phb;
 	//用户名验证提示
 	    function uin(){ucue.innerHTML="用户名长度在6到9位";}
 	    function uout(){
-				if(!uname.value){ucue.innerHTML="用户名不能为空";}
+				if(!uname.value){ucue.innerHTML="用户名不能为空";ub=false;}
 				else{
 	    //用户名是否可用验证
+        var   $uname=uname.value;
 				var 	xhr=new XMLHttpRequest();
 					    xhr.onreadystatechange=function(){
-								if(xhr.State==4&&xhr.staus==200)
+								if(xhr.readyState==4&&xhr.status==200)
 								{
 									var result=xhr.responseText;
-									if(result==="1"){ucue.innerHTML="用户可以使用";}
-									else if(result==="0"){ucue.innerHTML="用户名已存在";}
+									if(result==="1"){ucue.innerHTML="用户名可以使用";ub=true;}
+									else if(result==="0"){ucue.innerHTML="用户名已存在";ub=false;}
 								}
 					    }
-							xhr.open("get","/verify_user/uname="+$uname,true);
+					    xhr.open("get","/user/verify_user/"+$uname,true);
               xhr.send();
 					}
 				}
   //密码验证提示
-	    function ppin(){ppcue.innerHTML="密码长度在6到12位";}
-			function ppout(){if(!upwd.value){ppcue.innerHTML="密码不能为空";}}
+	    function pdin(){pdcue.innerHTML="密码长度在6到12位";}
+	    function pdout(){
+            if(!upwd.value){pdcue.innerHTML="密码不能为空";pdb=false;}
+            else{pdcue.innerHTML="密码可用";pdb=true;}
+            }
 	//密码确认验证
 	    function cpin(){cpcue.innerHTML="密码长度在6到12位";}
-			function cpout(){
-				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空";
-				}
-				else if(cpwd.value!==upwd.value){cpcue.innerHTML="两次输入密码不一致";}
-				else{cpcue.innerHTML="两次输入密码一致";}
+	    function cpout(){
+				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空"cdb=false;}
+				else if(cpwd.value!==upwd.value){cpcue.innerHTML="两次输入密码不一致";cdb=false;}
+				else{cpcue.innerHTML="两次输入密码一致";cdb=true;}
 				}
 	//邮箱验证提示
 	    function ein(){ecue.innerHTMl="请输入合法的邮箱地址";}
-			function eout(){
-				if(!email.value){ecue.innerHTML="邮箱不能为空";}
-				else
+	    function eout(){
+				if(!email.value){ecue.innerHTML="邮箱不能为空";eb=false;}
+        else
 				{
 			//邮箱格式是否正确验证
-			var $email=email.value;
-			    
+			var rtem=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/ ;
+			    if(rtem.test(email.value)){ecue.innerHTML="邮箱格式正确";eb=true;}
+					else{ecue.innerHTML="邮箱格式错误";eb=false;}
 				}
 			}
+    //手机号验证提示
+        function phin(){phcue.innerHTML="请输入正确的手机号码";}
+        function phout(){
+            if(!phone.value){phcue.innerHTML="手机号不能为空";phb=false;}
+            else{
+					//手机号码的格式验证
+                var rgt=/^1\d{10}$/;
+                if(rgt.test(phone.value)){phcue.innerHTML="手机号输入正确";phb=true;}
+                else{phcue.innerHTML="手机号码格式有误";phb=false;} 
+                }
+            }
 	//登入function	
 		  function regist(){
 				var $uname=uname.value,
 				    $upwd=upwd.value,
-						$email=email.value,
-						$phone=phone.vlaue;
-				var xhr.XMLHttpRequest();
+						$cpwd=cpwd.value,
+					  $email=email.value,
+					  $phone=phone.value;
+				var xhr=new XMLHttpRequest();
 				    xhr.onreadystatechange=function(){
 							if(xhr.readyState==4&&xhr.status==200)
 							{
@@ -59,10 +77,12 @@
 								else if(result==="0"){alert("注册失败");}
 							}
 				    }
-						xhr.open("post","/user/reg",true);
-						xhr.setRequestHeader("Content-type","application/x-www-form-urlencoding");
-				var formdata="uname="+$uname+"upwd="+$upwd+"email="+$email+"phone="+$phone;
-				    xhr.send(formdata);
+					xhr.open("post","/user/reg",true);
+					xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				var formdata="uname="+$uname+"&upwd="+$upwd+"&email="+$email+"&phone="+$phone;
+				if(ub&&pdb&&cpb&&eb&&phb===true)
+				 { xhr.send(formdata);}
+				 else{return;}
 		  }
 	</script>
   <style>
@@ -109,7 +129,7 @@
     input::-webkit-input-placeholder{
         font-size:16px;
     }
-		.reg tfoot input{
+		.reg tfoot button{
 		    width:300px; height:45px;
         outline:none;
 		}
@@ -117,6 +137,7 @@
         border:0px solid #000;
         font-size:15px;
         background-color:red;
+        color:#000;
     }
   </style>
   <title>Document</title>
@@ -129,7 +150,7 @@
                   <td colspan="2">
                     <h2 class="clr2">
                       新用户注册
-                      <a class="bod flt1 ts1 td1 clr2"href="user_login.html">直接登入</a>
+                      <a class="bod flt1 ts1 td1 clr2" href="user_login.html">直接登入</a>
                     </h2>
                   </td>
                   <td></td>
@@ -139,7 +160,7 @@
 						<tr>
 							<td class="ta1 wt4">用户名：</td>
 							<td class="wt2">
-								<input id="uname"onfocus="uin()"onblur="uout()"type="text"placeholder="请 设 置 您 的 用 户 名">
+								<input id="uname" onfocus="uin()" onblur="uout()" type="text" placeholder="请 设 置 您 的 用 户 名">
 							</td>
 							<td class="wt3">
 							   <span id="ucue"></span>
@@ -148,16 +169,16 @@
 						<tr>
 							<td class="ta1">登入密码：</td>
 							<td>
-								<input id="upwd"onfocus="pdin()"onblur="pdout()"type="password"placeholder="请 设 置 您 的 密 码">
+								<input id="upwd" onfocus="pdin()" onblur="pdout()" type="password" placeholder="请 设 置 您 的 密 码">
 							</td>
 							<td>
-								<span id="ppcue"></span>
+								<span id="pdcue"></span>
 							</td>
 						</tr>
 						<tr>
 							<td class="ta1">确认密码：</td>
 							<td>
-								<input id="cpwd"onfocus="cpin()"onblur="cpout()"type="password"placeholder="请 确 认 您 的 密 码">
+								<input id="cpwd" onfocus="cpin()" onblur="cpout()" type="password" placeholder="请 确 认 您 的 密 码">
 							</td>
 							<td>
 								<span id="cpcue"></span>
@@ -166,16 +187,16 @@
 						<tr>
 							<td class="ta1">邮箱：</td>
 							<td>
-							  <input id="email"onfocus="ein()"onblur="eout()"type="text"placeholder="请 输 入 您 的 邮 箱">
+							  <input id="email" onfocus="ein()" onblur="eout()" type="text" placeholder="请 输 入 您 的 邮 箱">
 							</td>
 							<td>
-								<span id="ecuce"></span>
+								<span id="ecue"></span>
 							</td>
 						</tr>
 						<tr>
 							<td class="ta1">手机号：</td>
 							<td>
-							  <input id="phone"onfocus="phin()"onblur="phout()"type="tel"max="11"placeholder="请 输 入 您 的 手 机 号">
+							  <input id="phone" onfocus="phin()" onblur="phout()" type="tel" max="11" placeholder="请 输 入 您 的 手 机 号">
 							</td>
 							<td>
 								<span id="phcue"></span>
@@ -186,7 +207,7 @@
 						<tr>
 							<td></td>
 							<td>
-							  <input onclick="regist()"class="bod txt1 bgc2 tw1 clr1"type="submit"value="提交注册信息">
+							  <button onclick="regist()" class="bod txt1 bgc2 tw1 clr1">提交注册信息</button>
 							</td>
 							<td></td>
 						</tr>

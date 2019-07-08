@@ -2,19 +2,80 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  
+    <script>
+		//查询用户信息
+		    function show(){
+					//获取地址栏的UID
+					var urlParams=new URLSearchParams(location.search);
+					var $uid=urlParams.get("uid");
+					alert($uid);
+					var xhr=new XMLHttpRequest();
+					    xhr.onreadystatechange=function(){
+								if(xhr.readyState==4&&xhr.status==200)
+								{
+									var uarr=JSON.parse(xhr.responseText)[0];
+									console.log(uarr.uname);
+									uid.value=$uid;
+								  uname.value=uarr.uname;
+								  upwd.value=uarr.upwd;
+								  email.value=uarr.email;
+								  phone.value=uarr.phone;
+								  user_name.value=uarr.user_name;
+									console.log(uarr.gender);
+									if(uarr.gender=="1"){man.checked=true;}
+									else if(uarr.gender=="0"){wman.checked=true;}
+									else{un.checked=true;}
+								}
+					    }
+							xhr.open('get','/user/v1/usearch/'+$uid,true);
+							xhr.send(null);
+		    }
+		//修改用户信息
+			  function upuser(){
+					var $uid=uid.value,
+					    $uname=uname.value,
+					    $upwd=upwd.value,
+							$email=email.value,
+							$phone=phone.value,
+							$user_name=user_name.value,
+							gender;
+					if(man.checked){$gender="1";}
+					if(wman.checked){$gender="0";}
+					if(un.checked){$gender="null";}
+					var xhr=new XMLHttpRequest();
+					    xhr.onreadystatechange=function(){
+								if(xhr.readyState==4&&xhr.status==200)
+								{
+									var result=xhr.responseText;
+									if(result==="1"){
+										alert("修改成功");
+									//如果修改成功，自动跳回之前页面，并刷新
+									location.href="http://127.0.0.1:8080/user_list.html"
+                  }
+									else if(reuslt==="0"){alert("修改失败");}
+								}
+					    }
+							xhr.open('post','/user/v1/upuser',true);
+							xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					var formdata="uid="+$uid+"&uname="+$uname+"&upwd="+$upwd+"&email="+$email+"&phone="+$phone+"&user_name="+$user_name+"&gender="+$gender;
+					    xhr.send(formdata);
+			  }
+		 
+    </script>
   <title>Document</title>
  </head>
- <body>
-  <div>
-	<form action="/user/update" method="post">
-		编号<input type="text"name="uid"><br>
-		手机<input type="text"name="phone"><br>
-		邮箱<input type="text"name="email"><br>
-		姓名<input type="text"name="user_name"><br>
-		性别<input type="text"name="gender"><br>
-		<input type="submit"value="提交修改">
-	</form>
-  </div>
+ <body onload="show()">
+    <div>
+		     编号：<input type="text"id="uid"readonly><br><!--只读，不能改-->
+			   用户名：<input type="text"id="uname"><br>
+			   密码：<input type="text"id="upwd"><br>
+			   邮箱：<input type="text"id="email"><br>
+			   手机：<input type="text"id="phone"><br>
+			   真实姓名：<input type="text"id="user_name"><br>
+			   性别：<input type="radio"name="sex"id="man">男
+				       <input type="radio"name="sex"id="wman">女
+							 <input type="radio"name="sex"id="un">保密<br>
+				 <button onclick="upuser()">提交修改信息</button>
+    </div>
  </body>
 </html>

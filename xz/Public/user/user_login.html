@@ -21,7 +21,7 @@
 							else if(result==="0"){alert("登入失败");}
 						}
 			    }
-					xhr.open("get","/user/login/uname="+$uname+"&upwd="+$upwd,true);
+					xhr.open("get","/user/login/"+$uname+"&"+$upwd,true);
 					xhr.send();
 		}
 	</script>

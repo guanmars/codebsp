@@ -2,16 +2,113 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  
+    <script>
+    //定义函数into（）把数据放入表格中
+        function into(arr,count){
+            var sect=`
+                 <table cellpadding=20px;cellspacing=20px;width:630px;align="center">
+                    <tr>
+                      <th>用户名</th>
+                      <th>电子邮箱</th>
+                      <th>联系方式</th>
+                      <th>真实姓名</th>
+                      <th>用户性别</th>
+                      <th>操作</th>
+                      </tr>`;
+            for(var i=0;i<count;i++)
+            {
+            sect+=`
+               <tr>
+                <td>${arr[i].uname}</td>
+                <td>${arr[i].email}</td>
+                <td>${arr[i].phone}</td>
+                <td>${arr[i].uname}</td>
+                <td>${arr[i].user_name}</td>
+                <td>${arr[i].gender}</td>
+                <td>
+								   <a href="JavaScript:deluser(${arr[i].uid})">删除</a>
+									 <a href="user_update.html?uid=${arr[i].uid}">修改</a></td>
+               </tr>
+                `;
+            }
+            sect+=`</table>`;
+            return sect; 
+        }
+    //查询用户列表list()
+        function list(){
+            var $count=count.value;
+            var xhr=new XMLHttpRequest();
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4&&xhr.status==200)
+                    {
+                     var uary=JSON.parse(xhr.responseText);
+								 //调用函数，将数据放入表格中
+										ulist.innerHTML=into(uary,$count);
+                  //底部页面内容
+                    var leng=uary.length;
+                    var pnov=parseInt(leng / $count);
+                        if((leng % $count)>0){pnov+=1;}
+                        var foot='';
+                        for(var i=1;i<=pnov;i++)
+                        {
+                          foot+=`<button onclick="spno(${i})" id="${i}">${i}</button>`;
+                        }
+                        pno.innerHTML=foot;
+                    }
+                }
+                xhr.open('get','/user/v1/list',true);
+                xhr.send();
+        }
+				
+		//分页查询spno()
+        function spno($i){
+            var $count=count.value;
+						var $start=$i*$count-$count;
+						console.log($count,$start);
+            var xhr=new XMLHttpRequest();
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4&&xhr.status==200)
+                    {
+											var result=xhr.responseText;
+											if(result==="0"){alert("未查询到数据");}
+											else{
+                      var uary=JSON.parse(result);
+                      ulist.innerHTML=into(uary,$count);
+											}
+                    }
+                }
+                xhr.open('post','/user/v1/plist',true);
+                xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                var formdata="start="+$start+"&count="+$count;
+								console.log(formdata);
+                xhr.send(formdata);      
+        }
+		//删除用户
+		    function deluser($uid){
+						var xhr=new XMLHttpRequest();
+						    xhr.onreadystatechange=function(){
+									if(xhr.readyState==4&&xhr.status==200)
+									{
+										var result=xhr.responseText;
+										if(result==="1"){alert("删除成功");show();}
+										else{alert("删除失败");}
+									}
+						    }
+								xhr.open("delete","/user/v1/deluser/"+$uid,true);
+								xhr.send();
+		    }
+    </script>
   <title>Document</title>
  </head>
  <body>
-  <div>
-	<form action="/user/list"method="get">
-		大小<input type="text"name="count"><br>
-		页码<input type="text"name="pno"><br>
-		<input type="submit"value="提交">
-	</form>
-  </div>
+    <div>
+        <header>
+          <input type="search" id="count" placeholder="请输入每页数据量">
+					<button onclick="list()">查询</button> 
+        </header>
+        <section id="ulist"></section>
+        <footer id="pno"></footer>
+        
+    </div>
  </body>
 </html>

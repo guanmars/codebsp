@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <script>
+	    //定义bool变量
+			var ub,pdb,cdb,eb,phb;
+		  //用户名验证提示
+	    function uin(){ucue.innerHTML="用户名长度在6到9位";}
+	    function uout(){
+				if(!uname.value){ucue.innerHTML="用户名不能为空";ub=false;}
+				else{
+	    //用户名是否可用验证
+        var   $uname=uname.value;
+				var 	xhr=new XMLHttpRequest();
+					    xhr.onreadystatechange=function(){
+								if(xhr.readyState==4&&xhr.status==200)
+								{
+									var result=xhr.responseText;
+									if(result==="1"){ucue.innerHTML="用户名可以使用";ub=true;}
+									else if(result==="0"){ucue.innerHTML="用户名已存在";ub=false;}
+								}
+					    }
+					    xhr.open("get","/user/verify_user/"+$uname,true);
+              xhr.send();
+					}
+				}
+  //密码验证提示
+	    function pdin(){pdcue.innerHTML="密码长度在6到12位";}
+	    function pdout(){
+            if(!upwd.value){pdcue.innerHTML="密码不能为空";pdb=false;}
+            else{pdcue.innerHTML="密码可用";pdb=true;}
+            }
+	//密码确认验证
+	    function cpin(){cpcue.innerHTML="密码长度在6到12位";}
+	    function cpout(){
+				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空";cpb=false;}
+				else if(cpwd.value!==upwd.value){cpcue.innerHTML="两次输入密码不一致";cpb=false;}
+				else{cpcue.innerHTML="两次输入密码一致";cpb=true;}
+				}
+	//邮箱验证提示
+	    function ein(){ecue.innerHTMl="请输入合法的邮箱地址";}
+	    function eout(){
+				if(!email.value){ecue.innerHTML="邮箱不能为空";eb=false;}
+				else
+				{
+			//邮箱格式是否正确验证
+			var rtem=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/ ;
+			    if(rtem.test(email.value)){ecue.innerHTML="邮箱格式正确";eb=true;}
+					else{ecue.innerHTML="邮箱格式错误";eb=false;}
+				}
+			}
+    //手机号验证提示
+        function phin(){phcue.innerHTML="请输入正确的手机号码";}
+        function phout(){
+            if(!phone.value){phcue.innerHTML="手机号不能为空";phb=false;}
+            else{
+                var rtph=/^1\d{10}$/;
+                if(rtph.test(phone.value)){phcue.innerHTML="手机号输入正确";phb=true;}
+                else{phcue.innerHTML="手机号码格式有误";phb=false;} 
+                }
+            }
+	//登入function	
+		  function regist(){
+				var $uname=uname.value,
+				    $upwd=upwd.value,
+						$cpwd=cpwd.value,
+					  $email=email.value,
+					  $phone=phone.value;
+				var xhr=new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200)
+							{
+								var result=xhr.responseText;
+								if(result==="1"){alert("注册成功");}
+								else if(result==="0"){alert("注册失败");}
+							}
+				    }
+					xhr.open("post","/user/reg",true);
+					xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				var formdata="uname="+$uname+"&upwd="+$upwd+"&email="+$email+"&phone="+$phone;
+				if(ub&&pdb&&cpb&&eb&&phb===true)
+				    {xhr.send(formdata);}
+				else{return;}
+		  }
+  </script>
+  <title>Document</title>
+ </head>
+ <body>
+    用户名：<input type="text"id="uname"onfocus="uin()"onblur="uout()">
+		<span id="ucue"></span><br>
+    登入密码：<input type="password"id="upwd"onfocus="pdin()"onblur="pdout()">
+		<span id="pdcue"></span><br>
+    确认密码：<input type="text"id="cpwd"onfocus="cpin()"onblur="cpout()">
+		<span id="cpcue"></span><br>
+    邮箱：<input type="text"id="email"onfocus="ein()"onblur="eout()">
+		<span id="ecue"></span><br>
+    手机号：<input type="text"id="phone"onfocus="phin()"onblur="phout()">
+		<span id="phcue"></span><br>
+		<button onclick="regist()">提交注册信息</button>
+ </body>
+</html>
