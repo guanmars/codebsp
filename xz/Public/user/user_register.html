@@ -34,7 +34,7 @@
 	//密码确认验证
 	    function cpin(){cpcue.innerHTML="密码长度在6到12位";}
 	    function cpout(){
-				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空"cdb=false;}
+				if(!cpwd.value){cpcue.innerHTML="确认密码不能为空";cdb=false;}
 				else if(cpwd.value!==upwd.value){cpcue.innerHTML="两次输入密码不一致";cdb=false;}
 				else{cpcue.innerHTML="两次输入密码一致";cdb=true;}
 				}
