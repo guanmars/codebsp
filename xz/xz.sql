@@ -138,7 +138,7 @@ INSERT INTO xz_laptop_family VALUES
 (NULL,'戴尔燃7000'),
 (NULL,'戴尔灵越15PR-5745B'),
 (NULL,'ThinkPadE470 C'),
-(NULL,'华硕FH5900V'),
+(NULL,'华硕FH5900V'), 
 (NULL,'神舟战神Z7M-KP7GT');
 
 /**笔记本电脑**/

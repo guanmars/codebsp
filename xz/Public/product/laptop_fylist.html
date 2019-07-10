@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+    <script>
+  //将商品家族信息添加表格
+		  function into(arr,count){
+			  var lfy=`<tabel>
+				               <tr>
+				                 <th>家族编号</th>
+				                 <th>家族名称</th>
+												 <th>操作</th>
+				               </tr>
+				           `;
+				for(var i=0;i<count;i++){
+					  lfy+=`<tr>
+						        <td>${arr[i].fid}</td>
+										<td>${arr[i].fname}</td>
+										<td>
+										 <a href="javascript:delfy(${arr[i].fid})">
+										 delete-family</a>
+										 <a href="javascript:schpro(${arr[i].fid})">product-query</a>
+										<a href="javascript:add(${arr[i].fid})">product-add</a>
+										</td>
+									</tr>`;
+				    }
+						lfy+=`<tr id="adds"></tr>
+						      <tr id="lasttr">
+						       <td colspan="3">
+									  <a href="javascript:adds()">添加</a>
+									 </td>
+									</tr>
+								</table>`;
+						return lfy;
+		  }
+	//商品家族列表
+			function fylist(){
+			  var xhr=new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200){
+								var result=xhr.responseText;
+								var parr=JSON.parse(result);
+								var $length=parr.length;
+                laptopfy.innerHTML=into(parr,$length);
+							}
+				    }
+				    xhr.open('post','/product/v1/fylist',true);
+						xhr.send();
+			}
+	//添加商品家族
+	  //添加laptop-family的input输入框
+	    function adds(){
+				lasttd.innerHTML=`
+				    家族名称：
+				    <input id="fname"placeholder="please input laptop-family name">
+						<button onclick="addfy()">提交</button>
+						`;
+	    }
+		//将input的laptop-family添加MySQL
+			function addfy(){
+				var $fname=fname.value;
+				var xhr=new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200){
+								var result=xhr.responseText;
+                if(result==='0'){alert("添加失败");}
+								else{
+									var arr=JSON.parse(result)[0];
+									adds.innerHTML=`
+									     <td>${arr.fid}</td>
+											 <td>${arr.fname}</td>
+											 <td>
+										    <a href="javascript:delfy(${arr[i].fid})">delete-family</a>
+										    <a href="javascript:schpro(${arr[i].fid})">product-query</a>
+										    <a href="javascript:add(${arr[i].fid})">product-add</a>
+										</td>
+									`;
+									lasttr.innerHTML=`
+									   <td colspan="3">
+									     <a href="javascript:adds()">添加</a>
+									   </td>`;
+								}
+							}
+				    }
+						xhr.open('post','/product/v1/addfy');
+						xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			  var formdata='fname='+$fname;
+						xhr.send(formdata);
+			}
+	//删除商品家族
+			function delfy($fid){
+				var xhr=new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200){
+								var result=xhr.responseText;
+								if(result==="1"){
+									alert("删除成功");fylist();
+									}
+								else{alert("删除失败");}
+							}
+				    }
+						xhr.open('delete','/product/v1/delfy/'+$fid,true);
+						xhr.send();
+			}
+    </script>
+  <title>Document</title>
+ </head>
+ <body onload="fylist()">
+    <div id="laptopfy">	
+    </div>
+ </body>
+</html>
