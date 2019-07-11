@@ -5,7 +5,7 @@
     <script>
   //将商品家族信息添加表格
 		  function into(arr,count){
-			  var lfy=`<tabel>
+			  var lfy=`<table cellspacing="20px"cellpadding="5px"border="2px">
 				               <tr>
 				                 <th>家族编号</th>
 				                 <th>家族名称</th>
@@ -17,8 +17,7 @@
 						        <td>${arr[i].fid}</td>
 										<td>${arr[i].fname}</td>
 										<td>
-										 <a href="javascript:delfy(${arr[i].fid})">
-										 delete-family</a>
+										 <a href="javascript:delfy(${arr[i].fid})">delete-family</a>
 										 <a href="javascript:schpro(${arr[i].fid})">product-query</a>
 										<a href="javascript:add(${arr[i].fid})">product-add</a>
 										</td>
@@ -50,7 +49,7 @@
 	//添加商品家族
 	  //添加laptop-family的input输入框
 	    function adds(){
-				lasttd.innerHTML=`
+				lasttr.innerHTML=`
 				    家族名称：
 				    <input id="fname"placeholder="please input laptop-family name">
 						<button onclick="addfy()">提交</button>
@@ -70,9 +69,9 @@
 									     <td>${arr.fid}</td>
 											 <td>${arr.fname}</td>
 											 <td>
-										    <a href="javascript:delfy(${arr[i].fid})">delete-family</a>
-										    <a href="javascript:schpro(${arr[i].fid})">product-query</a>
-										    <a href="javascript:add(${arr[i].fid})">product-add</a>
+										    <a href="javascript:delfy(${arr.fid})">delete-family</a>
+										    <a href="javascript:schpro(${arr.fid})">product-query</a>
+										    <a href="javascript:add(${arr.fid})">product-add</a>
 										</td>
 									`;
 									lasttr.innerHTML=`
@@ -89,6 +88,7 @@
 			}
 	//删除商品家族
 			function delfy($fid){
+				console.log($fid);
 				var xhr=new XMLHttpRequest();
 				    xhr.onreadystatechange=function(){
 							if(xhr.readyState==4&&xhr.status==200){

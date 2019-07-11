@@ -86,83 +86,75 @@
 		  }
 	</script>
   <style>
-    .bod{border:0px solid #000;}
+	  body{margin:0;padding:0;}
     .wt1{width:100%;}
-    .wt2{width:300px;}
-    .wt3{width:220px;}
-    .wt4{width:120px;}
-    .ht1{height:630px;}
-    .bgc1{background-color:#13a5f0;}
-    .bgc2{background-color:#a11311;}
-    .bgc3{background-color:#000;}
-    .bgi1{
-          background-image:url("../photo/215.jpg");
-          background-size:81% 100%;
-          }
-    .bgi2{
-          background-image:url("../photo/214.png");
-          background-size:130% 100%;
-          opacity:0.9;
-          }
-    .flt1{float:right;}
-    .mrg1{margin:40px 40px 0px 0px;}
-    .clr1{color:#fff;}
-    .clr2{color:#a11311;}
-    .clr3{color:#13a5f0;}
-	  .txt1{
-	    font-size:16px;
-	    font-family:"楷体";
-		  font-weight:800;
-	  }
-    .ts1{font-size:15px;}
-		.td1{text-decoration:none;}
-    .ta1{text-align:right;}
-    .tw1{font-weight:bold;}
-    .reg tbody tr{height:80px;}
-		.reg tfoot tr{height:80px;}
-    .reg tbody input{
-        border:0px solid #000;
-				padding-left:30px;
-        width:270px; height:40px;
-        outline:none;
-     }
-    input::-webkit-input-placeholder{
-        font-size:16px;
-    }
-		.reg tfoot button{
-		    width:300px; height:45px;
-        outline:none;
+    .wt2{width:90px;}
+    .wt3{width:275px;}
+    .ht1{height:560px;}
+		.bgi1{background:url(../cpi/bg.png)}
+    .flt2{float:right;}
+		.ft1{font:16px "华文行楷","楷体";}
+		.ta1{text-align:right;}
+		.clr1{color:#fff;}
+		#reg{
+		    width:590px; height:465px;
+				background:rgba(0,0,0,0.4);
+        float:right;
+				margin:33px 66px 0px 0px;	
 		}
-    .reg tbody span{
-        border:0px solid #000;
+		#reg tr{height:60px;}
+		#reg thead a{
+		    text-decoration:none;
+		    font:16px "华文行楷","楷体";
+				color:#fff;
+		}
+    #reg tbody input,button{
+        width:100%; height:36px;
+        outline:none;border:0;
+				box-sizing:border-box;
+				padding:0 20px;
+     }
+    #reg tbody input::-webkit-input-placeholder{
+        font-size:14px;
+    }
+		#reg tbody button{
+        border-radius:3px;
+				background-image:-webkit-linear-gradient(top,#26b0f6,#0aa1ed);
+				background-image:-moz-linear-gradient(top,#26b0f6,#0aa1ed);
+				background-image:-ms-linear-gradient(top,#26b0f6,#0aa1ed);
+				background-image:-o-linear-gradient(top,#26b0f6,#0aa1ed);
+				font-size:16px;
+		}
+    #reg tbody span{
         font-size:15px;
-        background-color:red;
+        background:#f00;
+				height:20px;
         color:#000;
     }
   </style>
   <title>Document</title>
  </head>
  <body>
-      <section class="wt1 ht1 bgi1">
-				<table class="reg txt1 bgi2 clr2 flt1 mrg1">
+      <section class="wt1 ht1 bgi1 ft1 clr1">
+				<table id="reg">
 				  <thead>
               <tr>
                   <td colspan="2">
-                    <h2 class="clr2">
+                    <h3>
                       新用户注册
-                      <a class="bod flt1 ts1 td1 clr2" href="user_login.html">直接登入</a>
-                    </h2>
+                      <a class="flt2" href="user_login.html">直接登入</a>
+                    </h3>
                   </td>
                   <td></td>
               </tr>
 				  </thead>
 					<tbody>
 						<tr>
-							<td class="ta1 wt4">用户名：</td>
-							<td class="wt2">
+							<td class="wt2 ta1">用户名：</td>
+							<td class="wt3">
 								<input id="uname" onfocus="uin()" onblur="uout()" type="text" placeholder="请 设 置 您 的 用 户 名">
 							</td>
-							<td class="wt3">
+							<td>
 							   <span id="ucue"></span>
 							</td>
 						</tr>
@@ -202,16 +194,14 @@
 								<span id="phcue"></span>
 							</td>
 						</tr>
-					</tbody>
-					<tfoot class="mrg2">
 						<tr>
 							<td></td>
 							<td>
-							  <button onclick="regist()" class="bod txt1 bgc2 tw1 clr1">提交注册信息</button>
+							  <button onclick="regist()"class="clr1">提交注册信息</button>
 							</td>
 							<td></td>
 						</tr>
-					</tfoot>
+					</tbody>
 				</table>
       </section> 
  </body>

@@ -5,13 +5,8 @@
    <style>
  /*常用的style设置*/
     /*所有元素去边距*/
-    *{margin:0; padding:0;}
-		#header li{
-		  border:0px solid #000;
-			float:left;
-			}
-    /*border style*/
-		  .bod{border:0px solid #000;}
+    body,p{margin:0; padding:0;}
+		#header li{float:left;}
     /*bgcolor style*/
       .bgc1{background-color:#f5f5f5;}
     /*list style none */
@@ -29,6 +24,8 @@
         .mrg{margin:auto;}
       /*top*/
         .mrgt1{margin-top:66px;}
+				.mrgt2{margin-top:10px;}
+				.mrgt3{margin-top:23px;}
       /*left*/
         .mrgl1{margin-left:30px}
         .mrgl2{margin-left:55px;}
@@ -38,14 +35,11 @@
 				.tf1{font-family:"楷体";}
       /*text-align style*/
         .ta1{text-align:center;}
-				.th1{line-height:25px;}
+				.th1{line-height:35px;}
  /*section style*/
     /*icon style*/
       /*li内容style*/
-		#icon li{
-		    border:0px solid #000;
-			  width:240px; height:80px;
-        }
+		#icon li{width:240px; height:80px;}
  /*footer style*/
     /*footer_section style*/
       /*中间文字域部分style*/
@@ -55,9 +49,9 @@
 				  line-height:25px;
 				  color:gray;
 				 }
-			 #ftxt li span a{
+			 #ftxt li span a,#bq{
 			      font-size:15px;
-						line-height:30px;
+						line-height:35px;
 						color:#000;
 					}
    </style>
@@ -65,9 +59,9 @@
  </head>
  <body id="header">
  <!--section-icon-->
-    <section class="bgc1 mrgt1 ht1 wt2">
+    <section class="bgc1 mrgt1 ht1 wt2 tf1">
     <!--用ul设计icon布局-->
-    	<ul class="list bod mrg wt1 tf1 th1 ta1"id="icon">
+    	<ul class="list mrg wt1 th1 ta1"id="icon">
 			  <li>
 				  <img src="cpi/icon1.png"><br>
 			    品质保证
@@ -87,20 +81,19 @@
 		  </ul>
     </section>
   <!--footer-section-->
-    <footer class="bod mrgt1 tf1">
+    <footer class="mrgt1 tf1">
     <!--foot内容部分-->
-    	<section class="bod mrg wt1 ht1 ">
+    	<section class="mrg wt1 ht1 ">
       <!--foot left section-->
-			  <div class="bod flt1">
+			  <div class="flt1">
         <!--两张logo图片-->
-			    <p class="th1">
-				    <img src="cpi/logo.png"><br>
-				    <img src="cpi/footerFont.png">
-				  </p>
+				    <img class="mrgt3"src="cpi/logo.png">
+						<br>
+				    <img class="mrgt2"src="cpi/footerFont.png">
 			  </div>
       <!--foot middle section-->
       <!--用ul设计文字布局-->
-        <ul class="flt1 list bod mrgl1 ta1"id="ftxt">
+        <ul class="flt1 list mrgl1 ta1"id="ftxt">
         <!--第一列--> 
           <li>
             <span>
@@ -136,21 +129,19 @@
           </li>
         </ul>
       <!--foot rignt section-->
-			  <ul class="list bod flt2"">
-				  <li class="bod flt1">
+			  <ul class="list flt2"">
+				  <li class="flt1">
             <p class="th1">学子商城客户端</p>
             <img src="cpi/ios.png"><br>
             <img src="cpi/android.png">
           </li>
-          <li class="bod flt2">
-            <img src="cpi/erweima.png">
+          <li class="flt2">
+            <img class="mrgt2"src="cpi/erweima.png">
           </li>
 			  </ul>
 		  </section>
-  <!--版权说明-->
-      <div class="bod wt1 mrg tf1 ta1">
-        <p>©2017 达内科技有限公司 版权所有 京ICP备08000853号-75</p>
-      <div>
+  <!--版权说明--> 
+      <p class="mrg ta1" id="bq">©2017 达内科技有限公司 版权所有 京ICP备08000853号-75</p>
     </footer>
  </body>
 </html>

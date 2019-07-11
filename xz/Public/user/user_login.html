@@ -27,96 +27,84 @@
 	</script>
   <style>
 /*base style*/
-  /*border style*/
-	.bod{border:0px solid #000;}
-  /*background-image style*/
-    .bgi1{background-image:url('../photo/215.jpg');}
-    .bgi2{background-image:url('../photo/212.jpg');}
-  /*background-size style*/
-    .bgs1{background-size:100% 100%;}
-    .bgs2{background-size:100% 280px;}
-  /*bgcolor style*/
-	 .bgc1{background-color:#fff;}
-    .bgc2{background-color:#a11311;}
-  /*width style*/
-    .wt1{width:100%;}
-  /*height style*/
-	 .ht1{height:15px;}
-    .ht2{height:630px;}
-  /*padding style*/
-	 .pad1{padding:12.5px 35px 12.5px 20px;}
-	 .pad2{padding:10px 114px;}
-    .padr1{padding-right:35px;}
-  /*margin-top style*/
-	 .mrgt1{margin-top:10px;}
-  /*float style*/
-	 .flt1{float:left;}
-	 .flt2{float:right;}
-  /*color style*/
-    .clr3{color:#fff;}
-    .clr4{color:#a11311;}
-  /* font-family style*/
-	 .tf1{font-family:"楷体";}
-  /*font-size style*/
-	 .ts1{font-size:14px;}
-	 .ts2{font-size:20px;}
-  /*font-weight style*/
-    .tw1{font-weight:bold;}
-  /*text-decoration style*/
-    .td1{text-decoration:none;}
-  /*outline*/
-    .otl1{outline:none;}
-/*login-input-style*/
-	.login{
-	     width:270px; height:320px;
+    h2,p,input,span,button,label{padding:0;margin:0;}
+	.bgi1{background:url(../cpi/bg.png);}
+  .bgc2{background:#a11311;}
+  .bgc3{background:#0aaled;}
+  .wt1{width:100%;}
+  .ht2{height:560px;}
+	.flt1{float:left;}
+	.flt2{float:right;}
+	.tf1{font-family:"华文行楷","楷体";}
+	.clr1{color:#fff;}
+  .mrg1{margin:20px 0px 10px;}
+	.bdb1{border-bottom:2px solid #fff;}
+  a,label,#cue,#pcue{
+	  text-decoration:none;
+		color:#fff;
+		font-size:13px;
+		font-weight:600;
+	}
+	#login{
+	    width:273px; height:300px;
+			background:rgba(0,0,0,0.3);
 		  margin:160px 80px 0px 0px;
-		  padding:0 20px 10px 20px;
+			padding:10px;
+	}
+	#uname,#upwd,button{
+	  width:100%; height:38px;
+	  border:0;outline:none;
+		box-sizing:border-box;
+		padding:0px 20px;
+	}
+	#uname,#upwd{background:#fff url(../cpi/yhm.png) no-repeat 95% center;}
+	#upwd{
+	  background-image:url(../cpi/mm.png);
+		margin-top:20px;
+		}
+	#ucue,#pcue{height:15px;color:#f00;}
+	#login button{
+	  font:bold 16px "华文行楷","楷体";
+		border-radius:3px;
+		/*background-image:linear-gradient(to bottom,#26aff6,#0ba1ed);*/
+    background-image:-webkit-linear-gradient(top,#26aff6 0%,#0ba1ed 100%);
+    background-image:-moz-linear-gradient(top,#26aff6 0%,#0ba1ed 100%);
+    background-image:-ms-linear-gradient(top,#26aff6 0%,#0ba1ed 100%);
+    background-image:-o-linear-gradient(top,#26aff6 0%,#0ba1ed 100%);
 	}
   </style>
  </head>
  <body>
    <!--section login-->
-      <section class="bod bgi1 bgs1 wt1 ht2 tf1">
+    <section class="bgi1 wt1 ht2">
 		<!--login-input-->
-			<div class="login bod bgi2 bgs2 clr3 flt2">
+			<div id="login"class="flt2 tf1 clr1">
 			<!--head 文字说明-->
-				<header class="desc bod">
-					<h2>登入学子商城
-               <!--注册页面的超链接-->
-                        <a class="bod flt2 td1 ts1 clr4"href="user_register.html">
-                            新用户注册
-                        </a>
-						  <br>
-						  <hr border="2px"color="#a11311">
-          </h2>
+				<header class="bdb1">
+					<h3 class="mrg1">登入学子商城
+          <!--注册页面的超链接-->
+            <a class="flt2"href="user_register.html">
+                新用户注册
+            </a>
+          </h3>
 				</header>
 			<!--用户、密码输入框-->
-				<section class="bod">
+				<section>
 				<!--用户输入框-->
-				   <div class="bod bgc1">
-				      <input class="bod pad1 otl1"id="uname"onfocus="uin()"onblur="uout()"type="text"placeholder="请输入您的用户名">
-					    <img src="../cpi/yhm.png"align="absmiddle">
-					</div>
+				  <input class="mrg1"id="uname"onfocus="uin()"onblur="uout()"type="text"placeholder="请输入您的用户名">
 				<!--提示框-->
-            <p class="bod ts1 ht1 clr4"id="ucue"></p>
+          <p id="ucue"></p>
 				<!--密码输入框-->
-					<div class="bod bgc1">
-					   <input class="bod pad1 padr1 otl1"id="upwd"onfocus="pin()"onblur="pout()"
-						 type="password"placeholder="请输入您的密码">
-					   <img src="../cpi/mm.png"align="absmiddle">
-					</div> 
+					<input id="upwd"onfocus="pin()"onblur="pout()"type="password"placeholder="请输入您的密码">
 				<!--提示框-->
-					<p class="bod ts1 ht1 clr4"id="pcue"></p>
-				</section>
-			<!--foot 登入部分-->
-				<footer>
-				<!--自动登入/忘记密码-->
-				    <input type="CheckBox"id="slg">
-				    <label  class="ts1 tw1 clr3"for="slg">自动登入</label>
-					<span class="bod flt2 ts1 tw1 clr3">忘记密码?</span>
+					<p id="pcue"></p>
+				<!--忘记密码--!--自动登入-->
+				  <input class="mrg1"id="slg"type="CheckBox">
+					<label for="slg">自动登入</label>
+					<a class="flt2">忘记密码?</a>
+					<br>
 				<!--登入框-->
-					<button onclick="login()"class="bod bgc2 pad2 mrgt1 tf1 ts2 tw1 clr3 otl1">登录</button>
-				</footer>
+					<button class="clr1 bgc3"onclick="login()">登&nbsp;&nbsp;录</button>
 				</section>
 			</div>
       </section>
