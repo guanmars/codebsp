@@ -5,12 +5,12 @@
    <style>
  /*常用的style设置*/
     /*所有元素去边距*/
-    body,p{margin:0; padding:0;}
-		#header li{float:left;}
+    body,ul,p{margin:0; padding:0;}
+		li{float:left;}
     /*bgcolor style*/
-      .bgc1{background-color:#f5f5f5;}
+      .bgc1{background:#f5f5f5;}
     /*list style none */
-      .list{list-style:none; }
+      .list{list-style:none;}
     /*width style*/
       .ht1{height:150px;}
       .ht2{height:100%}
@@ -20,6 +20,7 @@
     /*float style*/
         .flt1{float:left;}
         .flt2{float:right;}
+				.clf1{clear:both;}
     /*margin style*/
         .mrg{margin:auto;}
       /*top*/
@@ -35,13 +36,10 @@
 				.tf1{font-family:"楷体";}
       /*text-align style*/
         .ta1{text-align:center;}
-				.th1{line-height:35px;}
- /*section style*/
-    /*icon style*/
-      /*li内容style*/
-		#icon li{width:240px; height:80px;}
+				.th1,#ftxt span a,#bq{line-height:35px;}
+ /*icon style*/
+		#icon li{width:240px;}
  /*footer style*/
-    /*footer_section style*/
       /*中间文字域部分style*/
        #ftxt a{
 			    text-decoration:none;
@@ -51,17 +49,16 @@
 				 }
 			 #ftxt li span a,#bq{
 			      font-size:15px;
-						line-height:35px;
 						color:#000;
 					}
    </style>
   <title>codeboy——footer</title>
  </head>
- <body id="header">
+ <body>
  <!--section-icon-->
-    <section class="bgc1 mrgt1 ht1 wt2 tf1">
+    <section class="bgc1 wt2 ht1 tf1">
     <!--用ul设计icon布局-->
-    	<ul class="list mrg wt1 th1 ta1"id="icon">
+    	<ul id="icon"class="list mrg wt1 ta1">
 			  <li>
 				  <img src="cpi/icon1.png"><br>
 			    品质保证
@@ -78,6 +75,7 @@
 				  <img src="cpi/icon4.png"><br>
 				  专属特权
 			  </li>
+				<li class="clf1"></li>
 		  </ul>
     </section>
   <!--footer-section-->
@@ -87,7 +85,7 @@
       <!--foot left section-->
 			  <div class="flt1">
         <!--两张logo图片-->
-				    <img class="mrgt3"src="cpi/logo.png">
+				    <img src="cpi/logo.png">
 						<br>
 				    <img class="mrgt2"src="cpi/footerFont.png">
 			  </div>

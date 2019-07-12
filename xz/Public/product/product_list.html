@@ -2,16 +2,42 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  
+  <script>
+	//将商品信息添加table
+	  function into(arr,count){
+			  var ptlist=`<table>
+			              <tr>
+										  <th>编号</th>
+											<th>主标题</th>
+											<th>操作</th>
+										</tr>`; 
+			  for(var i=0;i<count;i++){
+					ptlist+=`<tr>
+				             <td>${arr[i].lid}</td>
+				             <td>${arr[i].title}</td>
+				             <td>${arr[i].prace}</td>
+				             <td>${arr[i].spec}</td>
+				             <td>${arr[i].os}</td>
+				             <td>${arr[i].is_onsale}</td>
+				             <td></td>
+			            </tr>`;
+			  }
+	  }
+	  function prolist(){
+			var pro
+	  }
+  </script>
   <title>Document</title>
  </head>
- <body>
+ <body onload="prolist()">
   <div>
-	<form action="/product/list"method="get">
-		大小<input type="text"name="count"><br>
-		页码<input type="text"name="pno"><br>
-		<input type="submit"value="提交">
-	</form>
+		<input type="search"placeholder="请输入页码大小">
+		<button>提交</button>
+		<td>
+			<a href="">update/detail</a>
+			<a href="">delete</a>
+			<a href=""></a>
+		</td>
   </div>
  </body>
 </html>

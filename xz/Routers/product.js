@@ -18,6 +18,17 @@ router.post('/v1/addfy',function(req,res){
 		else{res.send("0");}
 	});
 });
+//修改商品家族：put   /v1/updfy
+router.put('/v1/updfy',function(req,res){
+	var $fid=req.body.fid;
+	var $fname=req.body.fname;
+	sql="update xz_laptop_family set fname=? where fid=?";
+	pool.query(sql,[$fname,$fid],function(err,result){
+		if(err)throw err;
+		if(resutl.affectedRows>0){res.send("0");}
+		else{res,send("0");}
+	});
+});
 //商品家族列表： post   /v1/fylist
 router.post('/v1/fylist',function(req,res){
 	var sql="select *from xz_laptop_family";
@@ -29,8 +40,7 @@ router.post('/v1/fylist',function(req,res){
 //商品家族的删除： delete  /v1/delfy/:fid
 router.delete('/v1/delfy/:fid',function(req,res){
 	var $fid=req.params.fid;
-	console.log($fid);
-	var sql="delete xz_laptop_family where fid=?";
+	var sql="delete from xz_laptop_family where fid=?";
 	pool.query(sql,[$fid],function(err,result){
 		if(err)throw err;
 		if(result.affectedRows>0){res.send("1");}
