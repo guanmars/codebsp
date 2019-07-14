@@ -2,15 +2,160 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  
+	<script>
+	//创建商品详情表
+	  function into(arr,sign){
+			var pdetail=`<table>
+			              <tr>
+			                <td>家族编号</td>
+											<td><input type="text"id="family_id"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>主标题</td>
+											<td><input type="text"id="title"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>副标题</td>
+											<td><input type="text"id="subtitle"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>价格</td>
+											<td><input type="text"id="price"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>服务承诺</td>
+											<td><input type="text"id="promise"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>规格颜色</td>
+											<td><input type="text"id="spec"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>商品名称</td>
+											<td><input type="text"id="lname"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>操作系统</td>
+											<td><input type="text"id="os"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>内存</td>
+											<td><input type="text"id="memory"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>分辨率</td>
+											<td><input type="text"id="resolution"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>显卡型号</td>
+											<td><input type="text"id="video_card"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>处理器</td>
+											<td><input type="text"id="cpu"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>显存</td>
+											<td><input type="text"id="video_memory"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>所属分类</td>
+											<td><input type="text"id="category"></td>
+											<td></td>
+										</tr>
+										<tr>
+			                <td>硬盘详情</td>
+											<td><input type="text"id="disk"></td>
+										</tr>
+										<tr>
+			                <td>上架时间</td>
+											<td><input type="text"id="shelf_time"></td>
+										</tr>
+										<tr>
+			                <td>售出量</td>
+											<td><input type="text"id="sold_count"></td>
+										</tr>
+										<tr>
+			                <td>是否在售</td>
+											<td><input type="text"id="is_onsale"></td>
+										</tr>
+										<tr>
+			                <td>详情</td>
+											<td>
+											  <textarea id="details"></textarea>
+											</td>
+										</tr>
+										<tr>
+										  <td>
+											  <button onclick="updetail(${arr.lid})">提交</button>
+											</td>
+										</tr>
+			        `;
+					pdetail+=`</table>`;
+					//if(sign=="1"){var arrs=arr;save(arrs);}
+					return pdetail;
+	  }
+	//将商品详情放入表格
+	  function save(arr){
+			for(var star in arr){
+				console.log(typeof(star));
+				star.value=arr[star];
+			}
+	  }
+	//商品的详情
+		function details(){
+			var urlParams=new URLSearchParams(location.search);
+		  var $lid=urlParams.get("lid");
+			var $key=urlParams.get('keyword');
+			console.log($key);
+			var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var result=xhr.responseText;
+							if(result==="0"){alert('未查询到商品信息');}
+							else{
+								var darr=JSON.parse(result)[0];
+								pdetail.innerHTML=into(darr,1);
+								save(darr);
+							}
+						}
+			    }
+					xhr.open('get','/product/v1/detail/'+$lid,true);
+					xhr.send();
+		}
+	//提交修改的商品详情
+	  function updetail($lid){
+			var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var result=xhr.responseText;
+							if(result==="1"){alert('修改成功');details();}
+							else{alert('修改失败');}
+						}
+			    }
+					xhr.open('put','/product/v1/uppro',true);
+					xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			var formdata='lid='+$lid;
+			    xhr.send(formdata);
+	  }
+	</script>
   <title>Document</title>
  </head>
- <body>
-  <div>
-	<form action="/product/detail"method="get">
-		编号<input type="text"name="lid"><br>
-		<input type="submit"value="提交">
-	</form>
+ <body onload="details()">
+  <div id="pdetail">
   </div>
  </body>
 </html>

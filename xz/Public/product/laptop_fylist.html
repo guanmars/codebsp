@@ -5,7 +5,7 @@
     <script>
   //将商品家族信息添加表格
 		  function into(arr,count){
-			  var lfy=`<table cellspacing="20px"cellpadding="5px"border="2px">
+			  var lfy=`<table id="fylist"cellspacing="20px"cellpadding="5px"border="2px">
 				               <tr>
 				                 <th>家族编号</th>
 				                 <th>家族名称</th>
@@ -19,8 +19,8 @@
 										<td>
 										 <a href="javascript:updfy(${arr[i].fid})">update-family</a>
 										 <a href="javascript:delfy(${arr[i].fid})">delete-family</a>
-										 <a href="javascript:schpro(${arr[i].fid})">product-query</a>
-										 <a href="javascript:add(${arr[i].fid})">product-add</a>
+										 <a href="product_list.html?fid=${arr[i].fid}">product-query</a>
+										 <a href="product_list.html?fid=${arr[i].fid}">product-add</a>
 										</td>
 									</tr>`;
 				    }
@@ -51,20 +51,25 @@
 	  //添加laptop-family的input输入框
 	    function adds(){
 				lasttr.innerHTML=`
+				  <td colspan="3">
 				    家族名称：
 				    <input id="fname"placeholder="please input laptop-family name">
 						<button onclick="addfy()">提交</button>
+					</td>
 						`;
 	    }
 		//将input的laptop-family添加MySQL
 			function addfy(){
 				var $fname=fname.value;
+				if(!$fname){alert('请输入添加的家族信息');return;}
 				var xhr=new XMLHttpRequest();
 				    xhr.onreadystatechange=function(){
 							if(xhr.readyState==4&&xhr.status==200){
 								var result=xhr.responseText;
                 if(result==='0'){alert("添加失败");}
-								else{
+								else if(result==="1"){
+									alert('添加成功');fylist();
+									/*
 									var arr=JSON.parse(result)[0];
 									adds.innerHTML=`
 									     <td>${arr.fid}</td>
@@ -76,6 +81,7 @@
 										     <a href="javascript:add(${arr.fid})">product-add</a>
 										   </td>
 									`;
+									*/
 									lasttr.innerHTML=`
 									   <td colspan="3">
 									     <a href="javascript:adds()">添加</a>
@@ -93,9 +99,41 @@
 				var xhr=new XMLHttpRequest();
 				    xhr.onreadystatechange=function(){
 							if(xhr.readyState==4&&xhr.status==200){
-								var 
+								var result=xhr.responseText;
+								if(result==="0"){alert("未查询到该家族信息");}
+								else{
+									var arr=JSON.parse(result)[0];
+									fyfd.innerHTML=`
+									  <input id="ufid" readonly>
+										<input id="ufname"><br>
+										<button onclick="cancel()">取消修改</button>
+										<button onclick="submt(${$fid})">确定修改</button>
+									`;
+									ufid.value=$fid;
+									ufname.value=arr.fname;
+								}
 							}
 				    }
+				    xhr.open('get','/product/v1/schfy'+$fid,true);
+						xhr.send();
+	    }
+	//取消修改
+	    function cancel(){fyfd.innerHTML="";}
+	//提交修改后的信息
+	    function submt($fid){
+				var $ufname=ufname.value;
+				var xhr=new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+							if(xhr.readyState==4&&xhr.status==200){
+								var result=xhr.responseText;
+								if(result==="1"){alert('修改成功');fylist();cancel();}
+								else{alert('修改失败');}
+							}
+				    }
+						xhr.open('put','/product/v1/updfy');
+						xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			  var formdata='ufid='+$fid+'&ufname='+$ufname;
+				    xhr.send(formdata);
 	    }
 	//删除商品家族
 			function delfy($fid){
@@ -113,9 +151,53 @@
 						xhr.send();
 			}	
     </script>
+		<style>
+		 body,table{padding:0;margin:0;}
+		  #fyfd{
+			  float:left;
+			  width:70%;
+				margin-left:15%;
+				background:#0aa1ed;
+				border:1px solid #0aa1ed;
+				text-align:center;
+			}
+			#fyfd input,#fyfd button{
+			  width:70%;
+				font:bold 25px '楷体';
+				margin:20px 20px;
+				line-height:40px;
+			}
+			#fyfd #ufid,#fyfd button{
+			  width:10%;
+			}
+			#fylist{
+			  width:70%;
+				margin-left:15%;
+				font:25px '楷体';
+				line-height:40px;
+			}
+			#fylist a{
+			  float:left;
+				width:25%;
+				text-decoration:none;
+				text-align:center;
+			}
+			#fylist #lasttr{text-align:center;}
+			#fylist #lasttr input,#fylist #lasttr button{
+				border:0px;outline:none;
+				width:70%;
+				box-sizing:border-box;
+				font:bold 25px '楷体';
+				}
+			#fylist #lasttr button{
+			  width:10%;
+				background:#0aa1ed;
+				}
+		</style>
   <title>Document</title>
  </head>
  <body onload="fylist()">
+    <div id="fyfd"></div>
     <div id="laptopfy">	
     </div>
  </body>

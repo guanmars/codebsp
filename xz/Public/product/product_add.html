@@ -2,10 +2,29 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  
+  <script>
+	//添加商品信息
+	  function addpro($fid){
+			var urlParams=new URLSearchParams(location.search);
+		  var $fid=urlParams.get("fid");
+			family_id.value=$fid;
+			var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var result=xhr.responseText;
+							if(result==="1"){alert('添加成功');}
+							else{alert('添加失败');}
+						}
+			    }
+					xhr.open('post','product/v1/addpro',true);
+					xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			var formdata=;
+			    xhr.send(formdata);
+	  }
+  </script>
   <title>Document</title>
  </head>
- <body>
+ <body onload="addpro($fid)">
     <div>
 			家族编号<input type="text"id="family_id"><br>
 			主标题<input type="text"id="title"><br>

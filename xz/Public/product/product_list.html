@@ -5,39 +5,74 @@
   <script>
 	//将商品信息添加table
 	  function into(arr,count){
-			  var ptlist=`<table>
+			  var ptlist=`<table cellspaing="10px"cellpadding="20px">
 			              <tr>
-										  <th>编号</th>
+										  <th>商品编号</th>
 											<th>主标题</th>
+											<th>价格</th>
+											<th>是否上架</th>
 											<th>操作</th>
-										</tr>`; 
+									</tr>`; 
 			  for(var i=0;i<count;i++){
 					ptlist+=`<tr>
 				             <td>${arr[i].lid}</td>
 				             <td>${arr[i].title}</td>
-				             <td>${arr[i].prace}</td>
-				             <td>${arr[i].spec}</td>
-				             <td>${arr[i].os}</td>
-				             <td>${arr[i].is_onsale}</td>
-				             <td></td>
+				             <td>${arr[i].price}</td>
+									`;
+							  var onsale=arr[i].is_onsale;
+							  if(onsale=="1"){onsale="是";}
+							  else{onsale="否";}
+					ptlist+=`
+	                   <td>${onsale}</td>
+				             <td>
+										    <a href="product_detail.html?lid=${arr[i].lid}">detail/update</a>
+												<a href="JavaScript:delpro(${arr[i].lid})">delete</a>
+												<a href="product_add.html?fid=${arr[i].family_id}">add</a>
+										 </td>
 			            </tr>`;
-			  }
+			    }
+					ptlist+=`</table>`;
+					return ptlist;
 	  }
+	//发送请求，查询商品信息
 	  function prolist(){
-			var pro
+			var urlParams=new URLSearchParams(location.search);
+		  var $fid=urlParams.get("fid");
+			if($fid==null){$fid="not"}
+			var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var result=xhr.responseText;
+							if(result==="0"){alert('未查询到信息');}
+							else{
+								var parr=JSON.parse(result);
+								var length=parr.length;
+                ptlist.innerHTML=into(parr,length);
+							}
+						}
+			    }
+				xhr.open('post','/product/v1/prolist',true);
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		  var formdata="fid="+$fid;
+				xhr.send(formdata);
+	  }
+	//删除商品信息
+	  function delpro($lid){
+		  var xhr=new XMLHttpRequest();
+			    xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var result=xhr.responseText;
+							if(result==="1"){alert('删除成功');prolist();}
+							else{alert('删除失败');}
+						}
+			    }
+					xhr.open('delete','product/v1/delpro/'+$lid,true);
+					xhr.send();
 	  }
   </script>
   <title>Document</title>
  </head>
  <body onload="prolist()">
-  <div>
-		<input type="search"placeholder="请输入页码大小">
-		<button>提交</button>
-		<td>
-			<a href="">update/detail</a>
-			<a href="">delete</a>
-			<a href=""></a>
-		</td>
-  </div>
+  <div id="ptlist"></div>
  </body>
 </html>
