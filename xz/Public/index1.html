@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <style>
+	*{margin:0;padding:0;}
+	  .fs1{font-size:32px;}
+	  .fs2{font-size:24px;}
+	  .fs3{font-size:12px;}
+		.clr1{color:#0aa1ed;}
+		.lft1{left:65px;}
+		.lft2{left:35px;}
+		.wt1{width:610px;}
+		.wt2{width:380px;}
+		#f1{
+		    width:1004px; height:610px;
+				display:flex;
+				flex-wrap:wrap;
+				justify-content:space-between;
+		}
+		#f1 .content{
+		    height:377px;
+				position:relative;
+				background:#ddd;
+				font-family:楷体;
+				color:#666;
+				margin-bottom:10px;
+		}
+		#f1 .desc{
+		    width:245px; height:243px;
+				position:absolute;
+				top:55px;
+				}
+		#f1 .desc p{margin-bottom:10px;}
+		#f1 a{
+		    display:block;
+				width:130px;  height:40px;
+				background:#0aa1ed;
+				border-radius:3px;
+				text-decoration:none;
+				text-align:center;
+				font:bold 16px '楷体';
+				line-height:40px;
+		}
+		#f1 img{position:absolute;}
+		.img1{right:56px;  bottom:30px;}
+		.img2{right:25px; bottom:20px;}
+	  #f1 .content2,#f1 .content3{background:#ddd;}
+		#f1 .content2{
+		      width:377px; height:233px;}
+		#f1 .content3{width:198px; height:233px;}
+  </style>
+  <title>Document</title>
+ </head>
+ <body>
+    <div id="f1">
+			<div class="content wt1">
+				<div class="desc lft1">
+					<h1 class="fs1">Apple MacBook Air系列</h1>
+					<p class="fs3">酷睿双核i5处理器|256GB SSD|8GB内存|英特尔HD显卡620含共享显卡内存</p>
+					<p class="fs2 clr1">￥6988.00</p>
+					<a href="">查看详情</a>
+				</div>
+				<img class="img1"src="cpi/study_computer_img1.png">
+			</div>
+			<div class="content wt2">
+				<div class="desc lft2">
+					<h1 class="fs1">小米Air 金属超轻薄</h1>
+					<p class="fs3">酷睿双核i5处理器|512GB SSD|2GB内存|英特尔HD独立显卡</p>
+					<p class="fs2 clr1">￥3488.00</p>
+					<a href="">查看详情</a>
+				</div>
+				<img class="img2"src="cpi/study_computer_img2.png">
+			</div>
+			<div class="content2"></div>
+			<div class="content3"></div>
+			<div class="content3"></div>
+			<div class="content3"></div>
+    </div>
+ </body>
+</html>
