@@ -1,0 +1,33 @@
+
+.product-a{
+    display:inline-block;
+    width:100px; height:36px;
+    background:#0aa1ed;
+    border-radius:0.15rem;
+    font:bold 16px '楷体';
+    line-height:30px;
+    text-align:center;
+    color:#fff;
+}
+.bg-e{background:#e0e0e0; }
+.f_fs1{
+    width:25px; height:25px;
+    font-size:25px;
+    line-height:25px;
+}
+.f_fs2{
+    display:inline-block;
+    width:32px; height:25px;
+    font-size:16px;
+    text-align:center;
+    line-height:25px;
+}
+.p-fs1{
+    font-size:12px;
+    color:#666;
+}
+.p-fs2{
+    font-weight:bold;
+    color:#0aa1ed;
+}
+.p-lineh{line-height:40px;}
